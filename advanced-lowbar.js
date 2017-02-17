@@ -36,4 +36,15 @@ _.indexOf = function (array, value, isSorted = false) {
     }
 };
 
+_.once = function (func) {
+    var allowed = true;
+
+    return function () {
+        if (allowed) {
+            allowed = false;
+            return func();
+        }
+    }
+};
+
 module.exports = _;
