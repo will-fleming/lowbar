@@ -110,4 +110,16 @@ describe('_', function () {
         });
     });
 
+    describe('#shuffle', function () {
+        it('exists', function () {
+            expect(_.shuffle).to.be.a('function');
+        });
+    });
+
+    describe('#invoke', function () {
+        it('exists', function () {
+            expect(_.invoke).to.be.a('function');
+        });
+    });
+
 });

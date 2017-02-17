@@ -73,4 +73,21 @@ _.delay = function (func, wait) {
     }, wait);
 };
 
+_.shuffle = function (list) {
+    var result = [];
+   var copy = list.slice();
+    while (copy.length !== 0) {
+       var random = Math.floor(Math.random() * copy.length);
+       result.push(copy[random]);
+       copy.splice(random, 1);
+   }
+   return result;
+};
+
+_.invoke = function () {
+    
+};
+
+console.log(_.shuffle([1,2,3,4,5,6,7,8,9]));
+
 module.exports = _;
