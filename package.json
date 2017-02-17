@@ -1,0 +1,29 @@
+{
+  "name": "advanced-lowbar",
+  "version": "1.0.0",
+  "description": "In this sprint, you will continue to re-implement the Underscore library. This time, you will need to setup an NPM project from scratch, create the files and directories you need, and set up your test environment. Make sure you also install the NPM package `husky` and use a `precommit` script in your `package.json` file that lints your code using ESLint. Use your previous lowbar sprint code base as a reminder if you need to.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "husky": "^0.13.1",
+    "sinon": "^1.17.7"
+  },
+  "scripts": {
+    "test": "mocha ./spec/",
+    "lint": "eslint ./",
+    "posttest": "npm run lint",
+    "precommit": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/will-fleming/w02-advanced-lowbar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/will-fleming/w02-advanced-lowbar/issues"
+  },
+  "homepage": "https://github.com/will-fleming/w02-advanced-lowbar#readme"
+}
