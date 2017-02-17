@@ -84,6 +84,30 @@ describe('_', function () {
         it('exists', function () {
             expect(_.delay).to.be.a('function');
         });
+        it('still performs the function passed to it', function () {
+            var res = 0;
+            var spy = sinon.spy(function (a) { res = a * 2; });
+            var clock = sinon.useFakeTimers();
+            _.delay(spy, 0, 2);
+            clock.tick(1);
+            expect(res).to.equal(4);
+        });
+        it('gets passes through any number of arguments to func', function () {
+            var spy = sinon.spy(function () {});
+            var clock = sinon.useFakeTimers();
+            _.delay(spy, 0, 'arg1', 5, 'yogurt', []);
+            clock.tick(1);
+            expect(spy.args[0]).to.eql(['arg1', 5, 'yogurt', []]);
+        });
+        it('delays the function call by so many ms', function () {
+            var spy = sinon.spy(function () {});
+            var clock = sinon.useFakeTimers();
+            _.delay(spy, 1000);
+            clock.tick(999);
+            expect(spy.callCount).to.equal(0);
+            clock.tick(2);
+            expect(spy.callCount).to.equal(1);
+        });
     });
 
 });

@@ -61,8 +61,16 @@ _.memoize = function (func) {
     };
 };
 
-_.delay = function (func, delay) {
-    
+_.delay = function (func, wait) {
+    var args = [];
+
+    for (var i = 2; i < arguments.length; i++) {
+        args.push(arguments[i]);
+    }
+
+    setTimeout(function () {
+        return func.apply(null, args);
+    }, wait);
 };
 
 module.exports = _;
