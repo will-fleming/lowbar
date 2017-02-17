@@ -9,6 +9,9 @@ describe('_', function () {
         it('exists', function () {
             expect(_.indexOf).to.be.a('function');
         });
+        it('returns -1 if value is not in array', function () {
+            expect(_.indexOf([1,2,3], 4)).to.equal(-1);
+        });
     });
 
 });
