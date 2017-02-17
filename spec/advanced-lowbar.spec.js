@@ -48,6 +48,42 @@ describe('_', function () {
             tstFunc();
             expect(spy.callCount).to.equal(1);
         });
+        it('retains the functions err... functionality', function () {
+            var tstFunc = _.once(function (n) { return n * 2; });
+            expect(tstFunc(3)).to.equal(6);
+            tstFunc = _.once(function (a, b) { return a + b; });
+            expect(tstFunc(4, 7)).to.equal(11);
+        });
+    });
+
+    describe('#memoize', function () {
+        it('exists', function () {
+            expect(_.memoize).to.be.a('function');
+        });
+        it('still performs the function\'s job', function () {
+            var fibonacci = _.memoize(function (n) {
+                return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+            });
+            expect(fibonacci(10)).to.equal(55);
+        });
+        it('uses a cache to store previous values', function () {
+            var spy = sinon.spy(function (n) {
+                return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+            });
+            var fibonacci = _.memoize(spy);
+            fibonacci(10);
+            expect(spy.callCount).to.equal(11);
+            fibonacci(10);
+            expect(spy.callCount).to.equal(11);
+            fibonacci(11);
+            expect(spy.callCount).to.equal(12);
+        });
+    });
+
+    describe('#delay', function () {
+        it('exists', function () {
+            expect(_.delay).to.be.a('function');
+        });
     });
 
 });

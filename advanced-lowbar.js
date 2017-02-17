@@ -37,14 +37,32 @@ _.indexOf = function (array, value, isSorted = false) {
 };
 
 _.once = function (func) {
-    var allowed = true;
+    var allowed = true;    
 
     return function () {
         if (allowed) {
             allowed = false;
-            return func();
+            return func.apply(null, arguments);
         }
-    }
+    };
+};
+
+_.memoize = function (func) {
+    var cache = {};
+
+    return function () {
+        if (cache[arguments[0]]) {
+            return cache[arguments[0]];
+        }
+
+        var result = func.apply(null, arguments);
+        cache[arguments[0]] = result;
+        return result;   
+    };
+};
+
+_.delay = function (func, delay) {
+    
 };
 
 module.exports = _;
