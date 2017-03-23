@@ -405,5 +405,10 @@ describe ('_', () => {
 		});
 	});
 
-	
+	describe ('.invoke', () => {
+		it ('runs the given function for each value in the list', () => {
+			const list = [[3,2,1], [5,4,6]];
+			expect(_.invoke(list, 'sort')).to.eql([[1,2,3], [4,5,6]]);
+		});
+	});
 });

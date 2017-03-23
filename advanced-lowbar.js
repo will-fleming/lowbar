@@ -261,4 +261,12 @@ _.shuffle = function (list) {
 	return res;
 }
 
+_.invoke = function (list, methodName) {
+	const args = Array.prototype.slice.call(arguments, 2);
+
+	return _.map(list, function(value) {
+		return value[methodName].apply(value, args);
+	});
+}
+
 module.exports = _;
