@@ -383,5 +383,12 @@ describe ('_', () => {
 			clock.tick(2);
 			expect(spy.callCount).to.equal(1);
 		});
+		it ('calls the function with the correct arguments', () => {
+			const spy = sinon.spy(function () {});
+			const clock = sinon.useFakeTimers();
+			_.delay(spy, 100, 'hello', 'world');
+			clock.tick(100);
+			expect(spy.calledWith('hello', 'world'));
+		});
 	});
 });
