@@ -344,4 +344,20 @@ describe ('_', () => {
       expect(_.defaults({'a':1}, {'b':2}, {'c':3}, {'a':100})).to.eql({'a':1,'b':2,'c':3});
     });
   });
+
+  describe ('.once', () => {
+    const spy = sinon.spy(function (a, b) {});
+		it ('can only be called once', () => {
+      const func = _.once(spy);
+			func();
+			func();
+			func();
+			expect(spy.callCount).to.equal(1);
+    });
+		it ('gets called with the correct arguments', () => {
+			const func = _.once(spy);
+			func(100, 200);
+			expect(spy.calledWith(100, 200)).to.be.true;
+		});
+  });
 });

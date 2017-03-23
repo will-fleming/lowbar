@@ -219,4 +219,13 @@ _.defaults = function (object, defaults) {
   return object;
 }
 
+_.once = function (func) {
+	let called = false;
+
+	return function () {
+		if (!called) func.apply(null, arguments);
+		called = true;
+	}
+}
+
 module.exports = _;
