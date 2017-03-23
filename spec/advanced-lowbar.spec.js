@@ -362,11 +362,14 @@ describe ('_', () => {
   });
 
 	describe ('.memoize', () => {
+		var fibonacci = _.memoize(function(n) {
+			return n < 2 ? n: fibonacci(n - 1) + fibonacci(n - 2);
+		});
 		it ('speeds up the runtime of a recursive function', () => {
-			var fibonacci = _.memoize(function(n) {
-				return n < 2 ? n: fibonacci(n - 1) + fibonacci(n - 2);
-			});
 			expect(fibonacci(20)).to.equal(6765);
+		});
+		it ('the returned function has a cache property', () => {
+			expect(fibonacci.cache).to.be.an('object');
 		});
 	});
 });

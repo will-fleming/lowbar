@@ -231,10 +231,12 @@ _.once = function (func) {
 _.memoize = function (func, hashFunc) {
 	cache = {};
 
-	return function (n) {
+	function meme (n) {
 		cache[n] = func.apply(null, arguments);
 		return cache[n];	
 	}
+	meme.cache = cache;
+	return meme;
 }
 
 module.exports = _;
