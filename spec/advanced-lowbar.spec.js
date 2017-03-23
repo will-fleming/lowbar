@@ -422,4 +422,12 @@ describe ('_', () => {
 			expect(_.sortBy(obj, 'name')).to.eql(expected);
 		});
 	});
+
+  describe ('.zip', () => {
+    it ('merges arrays together', () => {
+      const actual = _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
+      const expected = [["moe", 30, true], ["larry", 40, false], ["curly", 50, false]];
+      expect(actual).to.eql(expected);
+    });
+  });
 });

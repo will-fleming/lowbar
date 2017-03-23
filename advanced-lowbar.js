@@ -304,4 +304,24 @@ _.sortBy = function (list, iteratee, context) {
 	}
 }
 
+_.zip = function () {
+  const arrays = _.map(arguments, function (arg) {
+    return arg;
+  });
+
+  let longestLength = 0;
+  _.each(arrays, function (arr) {
+    if (arr.length > longestLength) longestLength = arr.length;
+  });
+
+  const res = [];
+  for (let i = 0; i < longestLength; i++) {
+    res.push(_.map(arrays, function (arr) {
+      return arr[i];
+    }));
+  }
+
+  return res;
+}
+
 module.exports = _;
