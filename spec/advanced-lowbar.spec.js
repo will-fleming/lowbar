@@ -438,4 +438,12 @@ describe ('_', () => {
       expect(actual).to.eql(expected);
     });
   });
+
+  describe ('.difference', () => {
+    it ('finds the elements that are not present in all the other arrays', () => {
+      const actual = _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
+      const expected = [1,3,4];
+      expect(actual).to.eql(expected);
+    });
+  });
 });
