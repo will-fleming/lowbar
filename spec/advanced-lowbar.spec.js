@@ -360,4 +360,13 @@ describe ('_', () => {
 			expect(spy.calledWith(100, 200)).to.be.true;
 		});
   });
+
+	describe ('.memoize', () => {
+		it ('speeds up the runtime of a recursive function', () => {
+			var fibonacci = _.memoize(function(n) {
+				return n < 2 ? n: fibonacci(n - 1) + fibonacci(n - 2);
+			});
+			expect(fibonacci(20)).to.equal(6765);
+		});
+	});
 });

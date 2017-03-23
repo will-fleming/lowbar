@@ -228,4 +228,13 @@ _.once = function (func) {
 	}
 }
 
+_.memoize = function (func, hashFunc) {
+	cache = {};
+
+	return function (n) {
+		cache[n] = func.apply(null, arguments);
+		return cache[n];	
+	}
+}
+
 module.exports = _;
