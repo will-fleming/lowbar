@@ -239,4 +239,12 @@ _.memoize = function (func, hashFunc) {
 	return meme;
 }
 
+_.delay = function (func, wait) {
+	const args = Array.prototype.slice.call(arguments, 2);
+	
+	return setTimeout(function () {
+		return func.apply(null, args);
+	}, wait);
+};
+
 module.exports = _;

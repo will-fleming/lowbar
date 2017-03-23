@@ -372,4 +372,16 @@ describe ('_', () => {
 			expect(fibonacci.cache).to.be.an('object');
 		});
 	});
+
+	describe ('.delay', () => {
+		it ('calls the function only after a set time', () => {
+			const spy = sinon.spy(function () {});
+			const clock = sinon.useFakeTimers();
+			_.delay(spy, 100);
+			clock.tick(99);
+			expect(spy.callCount).to.equal(0);
+			clock.tick(2);
+			expect(spy.callCount).to.equal(1);
+		});
+	});
 });
