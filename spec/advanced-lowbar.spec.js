@@ -366,7 +366,7 @@ describe ('_', () => {
 			return n < 2 ? n: fibonacci(n - 1) + fibonacci(n - 2);
 		});
 		it ('speeds up the runtime of a recursive function', () => {
-			expect(fibonacci(20)).to.equal(6765);
+			expect(fibonacci(40)).to.equal(102334155);
 		});
 		it ('the returned function has a cache property', () => {
 			expect(fibonacci.cache).to.be.an('object');
@@ -391,4 +391,19 @@ describe ('_', () => {
 			expect(spy.calledWith('hello', 'world'));
 		});
 	});
+
+	describe ('.shuffle', () => {
+		it ('shuffles an array', () => {
+			const a = [1,2,3,4,5,6,7,8,9];
+			console.log('shuffling ' + a);
+			console.log(_.shuffle(a));
+		});
+		it ('shuffles an object', () => {
+			const o = {'a':1,'b':2,'c':3,'d':4,'e':5,'f':6};
+			console.log('shuffling ' + o);
+			console.log(_.shuffle(o));
+		});
+	});
+
+	
 });

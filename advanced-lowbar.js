@@ -232,7 +232,7 @@ _.memoize = function (func, hashFunc) {
 	cache = {};
 
 	function meme (n) {
-		cache[n] = func.apply(null, arguments);
+		if (cache[n] === undefined) cache[n] = func.apply(null, arguments);
 		return cache[n];	
 	}
 	meme.cache = cache;
@@ -246,5 +246,19 @@ _.delay = function (func, wait) {
 		return func.apply(null, args);
 	}, wait);
 };
+
+_.shuffle = function (list) {
+	const res = _.reduce(list, function (acc, curr) {
+		acc.push(curr);
+		return acc;
+	}, []);
+	_.each(res, function (value, i, list) {
+		const rand = Math.floor(Math.random() * list.length);
+		const tmp = value;
+		list[i] = list[rand];
+		list[rand] = tmp;
+	});
+	return res;
+}
 
 module.exports = _;
