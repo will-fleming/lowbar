@@ -430,4 +430,12 @@ describe ('_', () => {
       expect(actual).to.eql(expected);
     });
   });
+
+  describe ('.intersection', () => {
+    it ('finds the elements that are present in all the arrays', () => {
+      const actual = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+      const expected = [1,2];
+      expect(actual).to.eql(expected);
+    });
+  });
 });

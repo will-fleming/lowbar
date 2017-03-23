@@ -324,4 +324,19 @@ _.zip = function () {
   return res;
 }
 
+_.intersection = function () {
+  const arrays = _.map(arguments, function (arg) {
+    return arg;
+  });
+
+  let res = [].concat(arrays[0]);
+  _.each(arrays, function (arr) {
+    res = _.filter(res, function (elm) {
+      return _.contains(arr, elm);
+    });
+  });
+
+  return res;
+}
+
 module.exports = _;
