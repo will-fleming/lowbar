@@ -269,4 +269,39 @@ _.invoke = function (list, methodName) {
 	});
 }
 
+_.sortBy = function (list, iteratee, context) {
+	
+	if (typeof iteratee === 'function') {
+		iteratee = iteratee.bind(context);
+		
+		const res = _.reduce(list, function (acc, value, index, list) {
+			acc.push({
+				value: value,
+				index: index,
+				compare: iteratee(value, index, list)
+			});
+			return acc;
+		}, []);
+
+		res.sort(function (a, b) {
+			return a.compare > b.compare;
+		});
+
+		return _.pluck(res, 'value');
+
+	} else {
+
+		const res = _.reduce(list, function (acc, curr) {
+			acc.push(curr);
+			return acc;
+		}, []);
+
+		res.sort(function (a, b) {
+			return a[iteratee] > b[iteratee];
+		});
+
+		return res;
+	}
+}
+
 module.exports = _;

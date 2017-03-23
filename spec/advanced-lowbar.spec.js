@@ -411,4 +411,15 @@ describe ('_', () => {
 			expect(_.invoke(list, 'sort')).to.eql([[1,2,3], [4,5,6]]);
 		});
 	});
+
+	describe ('.sortBy', () => {
+		it ('sorts by iteratee', () => {
+			expect(_.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num); })).to.eql([5, 4, 6, 3, 1, 2]);
+		});
+		it ('sorts by property', () => {
+			const obj = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+			const expected = [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
+			expect(_.sortBy(obj, 'name')).to.eql(expected);
+		});
+	});
 });
