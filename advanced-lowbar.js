@@ -2,10 +2,36 @@ function binarySearch (list, value) {
     var s = 0;
     var e = list.length - 1;
 
-    for (var loop = 0; loop < 8; loop++) {
+    for (var loop = 0; loop < list.length; loop++) {
         var m = Math.floor((s + e) / 2);
     
         if (list[m] === value) {
+            return m;
+        }
+
+        if (list[m] > value) {
+            e = m - 1;
+        } 
+
+        if (list[m] < value) {
+            s = m + 1;
+        }
+    }
+
+    return -1;
+}
+
+function binaryInsertSearch (list, value) {
+    if (value > list[list.length - 1]) return list.length;
+    if (value < list[0]) return 0;
+    
+    var s = 0;
+    var e = list.length - 1;
+
+    for (var loop = 0; loop < list.length; loop++) {
+        var m = Math.floor((s + e) / 2);
+    
+        if (list[m] <= value <= list[m + 1]) {
             return m;
         }
 
@@ -229,7 +255,7 @@ _.once = function (func) {
 }
 
 _.memoize = function (func, hashFunc) {
-	cache = {};
+	const cache = {};
 
 	function meme (n) {
 		if (cache[n] === undefined) cache[n] = func.apply(null, arguments);
@@ -322,6 +348,12 @@ _.zip = function () {
   }
 
   return res;
+}
+
+_.sortedIndex = function (list, value, iteratee, context) {
+  if (context) iteratee = iteratee.bind(context);
+
+  return binaryInsertSearch(list, value);
 }
 
 _.intersection = function () {

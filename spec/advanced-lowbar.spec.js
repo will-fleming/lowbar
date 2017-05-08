@@ -446,4 +446,12 @@ describe ('_', () => {
       expect(actual).to.eql(expected);
     });
   });
+
+  describe ('.sortedIndex', () => {
+    it ('finds the index where the value should be inserted into an array to maintain order', () => {
+      expect(_.sortedIndex([1, 2, 4, 5, 6, 7], 3)).to.equal(2);
+      expect(_.sortedIndex([3, 4, 5], 1)).to.equal(0);
+      expect(_.sortedIndex([1, 2, 4, 5, 6, 7], 8)).to.equal(6);
+    });
+  });
 });
