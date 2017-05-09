@@ -79,7 +79,7 @@ const _ = {};
 
 _.identity = function (value) {
   return value;
-}
+};
 
 _.first = function (array, n = 1) {
   if (n === 1) return array[0];
@@ -89,7 +89,7 @@ _.first = function (array, n = 1) {
     res.push(array[i]);
   }
   return res;
-}
+};
 
 _.last = function (array, n = 1) {
   if (n === 1) return array[array.length - 1];
@@ -99,7 +99,7 @@ _.last = function (array, n = 1) {
     res.unshift(array[array.length - 1 - i]);
   }
   return res;
-}
+};
 
 _.each = function (list, iteratee, context) {
   if (typeof iteratee !== 'function') return list;
@@ -110,12 +110,12 @@ _.each = function (list, iteratee, context) {
       iteratee(list[i], i, list);
     }
   } else {
-    for (key in list) {
+    for (let key in list) {
       iteratee(list[key], key, list);
     }
   }
   return list;
-}
+};
 
 _.indexOf = function (array, value, isSorted) {
   if (isSorted) {
@@ -127,7 +127,7 @@ _.indexOf = function (array, value, isSorted) {
   }
 
   return -1;
-}
+};
 
 _.filter = function (list, predicate, context) {
   if (typeof predicate !== 'function') predicate = function () { return true };
@@ -138,7 +138,7 @@ _.filter = function (list, predicate, context) {
     if (predicate(element, index, list)) res.push(element);
   });
   return res;
-}
+};
 
 _.reject = function (list, predicate, context) {
   if (typeof predicate !== 'function') predicate = function () { return true };
@@ -149,7 +149,7 @@ _.reject = function (list, predicate, context) {
     if (!predicate(element, index, list)) res.push(element);
   });
   return res;
-}
+};
 
 _.uniq = function (array, isSorted, iteratee) {
   let res = [];
@@ -174,7 +174,7 @@ _.uniq = function (array, isSorted, iteratee) {
   });
 
   return res;
-}
+};
 
 _.map = function (list, iteratee, context) {
   if (typeof iteratee !== 'function') return list;
@@ -186,13 +186,13 @@ _.map = function (list, iteratee, context) {
   });
 
   return res;
-}
+};
 
 _.pluck = function (obj, key) {
   return _.map(obj, function (o) {
     return o[key];
   });
-}
+};
 
 _.reduce = function (list, iteratee, memo, context) {
   iteratee = iteratee.bind(context);
@@ -202,7 +202,7 @@ _.reduce = function (list, iteratee, memo, context) {
     memo = iteratee(memo, value, i, list);
   });
   return memo;
-}
+};
 
 _.contains = function (list, value, fromIndex = 0) {
   if (Array.isArray(list)) {
@@ -215,7 +215,7 @@ _.contains = function (list, value, fromIndex = 0) {
     }
   }
   return false;
-}
+};
 
 _.every = function (list, predicate, context) {
   predicate = predicate.bind(context);
@@ -230,7 +230,7 @@ _.every = function (list, predicate, context) {
     }
   }
   return true;
-}
+};
 
 _.some = function (list, predicate, context) {
   predicate = predicate.bind(context);
@@ -245,7 +245,7 @@ _.some = function (list, predicate, context) {
     }
   }
   return false;
-}
+};
 
 _.extend = function (destination, sources) {
   if (typeof destination !== 'object' || Array.isArray(destination)) return destination;
@@ -258,7 +258,7 @@ _.extend = function (destination, sources) {
   }
 
   return destination;
-}
+};
 
 _.defaults = function (object, defaults) {
   if (typeof object !== 'object' || Array.isArray(object)) return object;
@@ -271,7 +271,7 @@ _.defaults = function (object, defaults) {
   }
 
   return object;
-}
+};
 
 _.once = function (func) {
 	let called = false;
@@ -280,7 +280,7 @@ _.once = function (func) {
 		if (!called) func.apply(null, arguments);
 		called = true;
 	}
-}
+};
 
 _.memoize = function (func, hashFunc) {
 	const cache = {};
@@ -291,7 +291,7 @@ _.memoize = function (func, hashFunc) {
 	}
 	meme.cache = cache;
 	return meme;
-}
+};
 
 _.delay = function (func, wait) {
 	const args = Array.prototype.slice.call(arguments, 2);
@@ -313,7 +313,7 @@ _.shuffle = function (list) {
 		list[rand] = tmp;
 	});
 	return res;
-}
+};
 
 _.invoke = function (list, methodName) {
 	const args = Array.prototype.slice.call(arguments, 2);
@@ -321,7 +321,7 @@ _.invoke = function (list, methodName) {
 	return _.map(list, function(value) {
 		return value[methodName].apply(value, args);
 	});
-}
+};
 
 _.sortBy = function (list, iteratee, context) {
 	
@@ -356,7 +356,7 @@ _.sortBy = function (list, iteratee, context) {
 
 		return res;
 	}
-}
+};
 
 _.zip = function () {
   const arrays = _.map(arguments, function (arg) {
@@ -376,13 +376,13 @@ _.zip = function () {
   }
 
   return res;
-}
+};
 
 _.sortedIndex = function (list, value, iteratee, context) {
   if (context) iteratee = iteratee.bind(context);
 
   return binaryInsertSearch(list, value, iteratee);
-}
+};
 
 _.intersection = function () {
   const arrays = _.map(arguments, function (arg) {
@@ -397,7 +397,7 @@ _.intersection = function () {
   });
 
   return res;
-}
+};
 
 _.difference = function () {
   const arrays = _.map(arguments, function (arg) {
@@ -414,6 +414,6 @@ _.difference = function () {
   });
 
   return res;
-}
+};
 
 module.exports = _;
