@@ -1,50 +1,78 @@
 function binarySearch (list, value) {
-    var s = 0;
-    var e = list.length - 1;
+  var s = 0;
+  var e = list.length - 1;
 
-    for (var loop = 0; loop < list.length; loop++) {
-        var m = Math.floor((s + e) / 2);
+  for (var loop = 0; loop < list.length; loop++) {
+    var m = Math.floor((s + e) / 2);
+
+    if (list[m] === value) {
+      return m;
+    }
+
+    if (list[m] > value) {
+      e = m - 1;
+    } 
+
+    if (list[m] < value) {
+      s = m + 1;
+    }
+  }
+
+  return -1;
+}
+
+function binaryInsertSearch (list, value, property) {
+  let s, e, m;
+  if (property) {
+    if (value[property] > list[list.length - 1][property]) return list.length;
+    if (value[property] < list[0][property]) return 0;
     
-        if (list[m] === value) {
-            return m;
-        }
+    s = 0;
+    e = list.length - 1;
 
-        if (list[m] > value) {
-            e = m - 1;
-        } 
+    for (var i = 0; i < list.length; i++) {
+      m = Math.floor((s + e) / 2);
 
-        if (list[m] < value) {
-            s = m + 1;
-        }
+      if (list[m][property] <= value[property] <= list[m + 1][property]) {
+        return m + 1;
+      }
+
+      if (list[m][property] > value[property]) {
+        e = m - 1;
+      } 
+
+      if (list[m][property] < value[property]) {
+        s = m + 1;
+      }
     }
 
     return -1;
-}
-
-function binaryInsertSearch (list, value) {
+  } 
+  else {
     if (value > list[list.length - 1]) return list.length;
     if (value < list[0]) return 0;
     
-    var s = 0;
-    var e = list.length - 1;
+    s = 0;
+    e = list.length - 1;
 
-    for (var loop = 0; loop < list.length; loop++) {
-        var m = Math.floor((s + e) / 2);
-    
-        if (list[m] <= value <= list[m + 1]) {
-            return m;
-        }
+    for (var j = 0; j < list.length; j++) {
+      m = Math.floor((s + e) / 2);
 
-        if (list[m] > value) {
-            e = m - 1;
-        } 
+      if (list[m] <= value <= list[m + 1]) {
+        return m;
+      }
 
-        if (list[m] < value) {
-            s = m + 1;
-        }
+      if (list[m] > value) {
+        e = m - 1;
+      } 
+
+      if (list[m] < value) {
+        s = m + 1;
+      }
     }
 
     return -1;
+  }
 }
 
 const _ = {};
@@ -353,7 +381,7 @@ _.zip = function () {
 _.sortedIndex = function (list, value, iteratee, context) {
   if (context) iteratee = iteratee.bind(context);
 
-  return binaryInsertSearch(list, value);
+  return binaryInsertSearch(list, value, iteratee);
 }
 
 _.intersection = function () {

@@ -453,5 +453,9 @@ describe ('_', () => {
       expect(_.sortedIndex([3, 4, 5], 1)).to.equal(0);
       expect(_.sortedIndex([1, 2, 4, 5, 6, 7], 8)).to.equal(6);
     });
+
+    it ('works for objects when the iteratee is the name of the property to search for', () => {
+      expect(_.sortedIndex([{a:1}, {a:2}, {a:4}], {a:3}, 'a')).to.equal(2);
+    });
   });
 });
