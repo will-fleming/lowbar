@@ -458,4 +458,16 @@ describe ('_', () => {
       expect(_.sortedIndex([{a:1}, {a:2}, {a:4}], {a:3}, 'a')).to.equal(2);
     });
   });
+
+  describe ('.flatten', () => {
+    it ('flattens the array to remove all nesting', () => {
+      expect(_.flatten([1, [2, 3]])).to.eql([1, 2, 3]);
+      expect(_.flatten([1, 2, [3, 4], [5, [6]]])).to.eql([1, 2, 3, 4, 5, 6]);
+      expect(_.flatten([[[[1]]]])).to.eql([1]);
+    });
+
+    it ('flattens the array by one level only if shallow is true', () => {
+      expect(_.flatten([1, 2, [3, 4], [5, [6]]], true)).to.eql([1, 2, 3, 4, 5, [6]]);
+    });
+  });
 });

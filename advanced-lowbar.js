@@ -416,4 +416,34 @@ _.difference = function () {
   return res;
 };
 
+_.flatten = function (array, shallow) {
+  let newArr = [];
+
+  if (shallow) {
+    _.each(array, function (elm) {
+      if (!Array.isArray(elm)) {
+        newArr.push(elm);
+      } else {
+        _.each(elm, function (nestedElm) {
+          newArr.push(nestedElm);
+        });
+      }
+    });
+  } else {
+    _.each(array, function (elm) {
+      if (!Array.isArray(elm)) {
+        newArr.push(elm);
+      } else {
+        newArr = newArr.concat(_.flatten(elm));
+      }
+    });
+  }
+
+  return newArr;
+};
+
+_.throttle = function () {
+
+};
+
 module.exports = _;
