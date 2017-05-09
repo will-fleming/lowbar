@@ -442,8 +442,18 @@ _.flatten = function (array, shallow) {
   return newArr;
 };
 
-_.throttle = function () {
+_.throttle = function (func, wait) {
+  let canBeCalled = true;
 
+  return function () {
+    if (canBeCalled) {
+      func.apply(null, arguments);
+      canBeCalled = false;
+      setTimeout(() => {
+        canBeCalled = true;
+      }, wait);
+    }
+  };
 };
 
 module.exports = _;

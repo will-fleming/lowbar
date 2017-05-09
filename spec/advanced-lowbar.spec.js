@@ -470,4 +470,38 @@ describe ('_', () => {
       expect(_.flatten([1, 2, [3, 4], [5, [6]]], true)).to.eql([1, 2, 3, 4, 5, [6]]);
     });
   });
+
+  describe ('.throttle', () => {
+    it ('returns a function that acts as a copy of the function passed to it', () => {
+      const spy = sinon.spy();
+      const throttledFunc = _.throttle(spy, 100);
+      expect(spy.callCount).to.equal(0);
+      throttledFunc('hello');
+      expect(spy.callCount).to.equal(1);
+      expect(spy.args).to.eql([['hello']]);
+    });
+
+    it ('only allows the returned function to be called (wait) milliseconds after the last call', () => {
+      const spy = sinon.spy();
+      const throttledFunc = _.throttle(spy, 100);
+      const clock = sinon.useFakeTimers();
+      clock.tick(100);
+      expect(spy.callCount).to.equal(0);
+      throttledFunc();
+      expect(spy.callCount).to.equal(1);
+      throttledFunc();
+      expect(spy.callCount).to.equal(1);
+      clock.tick(100);
+      throttledFunc();
+      expect(spy.callCount).to.equal(2);
+      throttledFunc();
+      expect(spy.callCount).to.equal(2);
+      clock.tick(50);
+      throttledFunc();
+      expect(spy.callCount).to.equal(2);
+      clock.tick(60);
+      throttledFunc();
+      expect(spy.callCount).to.equal(3);
+    });
+  });
 });
