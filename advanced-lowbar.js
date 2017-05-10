@@ -1,9 +1,9 @@
 function binarySearch (list, value) {
-  var s = 0;
-  var e = list.length - 1;
+  let s = 0;
+  let e = list.length - 1;
 
-  for (var loop = 0; loop < list.length; loop++) {
-    var m = Math.floor((s + e) / 2);
+  for (let loop = 0; loop < list.length; loop++) {
+    let m = Math.floor((s + e) / 2);
 
     if (list[m] === value) {
       return m;
@@ -30,7 +30,7 @@ function binaryInsertSearch (list, value, property) {
     s = 0;
     e = list.length - 1;
 
-    for (var i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
       m = Math.floor((s + e) / 2);
 
       if (list[m][property] <= value[property] <= list[m + 1][property]) {
@@ -55,7 +55,7 @@ function binaryInsertSearch (list, value, property) {
     s = 0;
     e = list.length - 1;
 
-    for (var j = 0; j < list.length; j++) {
+    for (let j = 0; j < list.length; j++) {
       m = Math.floor((s + e) / 2);
 
       if (list[m] <= value <= list[m + 1]) {
@@ -130,7 +130,7 @@ _.indexOf = function (array, value, isSorted) {
 };
 
 _.filter = function (list, predicate, context) {
-  if (typeof predicate !== 'function') predicate = function () { return true };
+  if (typeof predicate !== 'function') predicate = function () { return true; };
   predicate = predicate.bind(context);
 
   const res = [];
@@ -141,7 +141,7 @@ _.filter = function (list, predicate, context) {
 };
 
 _.reject = function (list, predicate, context) {
-  if (typeof predicate !== 'function') predicate = function () { return true };
+  if (typeof predicate !== 'function') predicate = function () { return true; };
   predicate = predicate.bind(context);
 
   const res = [];
@@ -250,7 +250,7 @@ _.some = function (list, predicate, context) {
 _.extend = function (destination, sources) {
   if (typeof destination !== 'object' || Array.isArray(destination)) return destination;
 
-  for (i = 1; i < arguments.length; i++) {
+  for (let i = 1; i < arguments.length; i++) {
     const obj = arguments[i];
     for (let key in obj) {
       destination[key] = obj[key];
@@ -263,7 +263,7 @@ _.extend = function (destination, sources) {
 _.defaults = function (object, defaults) {
   if (typeof object !== 'object' || Array.isArray(object)) return object;
 
-  for (i = 1; i < arguments.length; i++) {
+  for (let i = 1; i < arguments.length; i++) {
     const obj = arguments[i];
     for (let key in obj) {
       if (object[key] === undefined) object[key] = obj[key];
@@ -282,7 +282,7 @@ _.once = function (func) {
 	}
 };
 
-_.memoize = function (func, hashFunc) {
+_.memoize = function (func) {
 	const cache = {};
 
 	function meme (n) {

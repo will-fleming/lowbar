@@ -147,7 +147,7 @@ describe ('_', () => {
       expect(_.filter({}, n => n === 0)).to.eql([]);
     });
     it ('returns only the values that pass the predicate test', () => {
-      expect(_.filter([1,2,3,4,5], n => n%2 === 0)).to.eql([2,4]);
+      expect(_.filter([1,2,3,4,5], n => n % 2 === 0)).to.eql([2,4]);
     });
     it ('binds the predicate to context', () => {
       const context = {hello: 'context'};
@@ -166,7 +166,7 @@ describe ('_', () => {
       expect(_.reject([1,2,3], n => n === 0)).to.eql([1,2,3]);
     });
     it ('returns only the values that do not pass the predicate test', () => {
-      expect(_.reject([1,2,3,4,5], n => n%2 === 0)).to.eql([1,3,5]);
+      expect(_.reject([1,2,3,4,5], n => n % 2 === 0)).to.eql([1,3,5]);
     });
     it ('binds the predicate to context', () => {
       const context = {hello: 'context'};
@@ -187,8 +187,8 @@ describe ('_', () => {
     });
 
     it ('uses the iteratee to compare properties of objects', () => {
-      let people = [{ name: 'John', age: 20 }, { name: 'Mary', age: 31 }, { name: 'Kevin', age: 20 }];
-      let expected = [ { age: 20, name: "John" }, { age: 31, name: "Mary" } ];
+      let people = [ {name: 'John', age: 20}, {name: 'Mary', age: 31}, {name: 'Kevin', age: 20} ];
+      let expected = [ {age: 20, name: 'John'}, {age: 31, name: 'Mary'} ];
       expect(_.uniq(people, false, function (p) { return p.age; })).to.eql(expected);
     });
   });
@@ -210,11 +210,11 @@ describe ('_', () => {
       expect(spy.thisValues[0]).to.eql({a: 'context'});
     });
     it ('returns a new array', () => {
-      function doubleNUm (n) { return n * 2; };
+      function doubleNUm (n) { return n * 2; }
       expect(_.map([1,2,3], doubleNUm)).to.eql([2,4,6]);
     });
     it ('maps over objects', () => {
-      function doubleNUm (n) { return n * 2; };
+      function doubleNUm (n) {return n * 2;}
       expect(_.map({0:1,1:2,2:3}, doubleNUm)).to.eql([2,4,6]);
     });
   });
@@ -228,7 +228,7 @@ describe ('_', () => {
 
   describe ('.reduce', () => {
     const context = {a: 'context'};
-    const spy = sinon.spy(function (acc, n) {return acc+n});
+    const spy = sinon.spy(function (acc, n) {return acc + n;});
     _.reduce([1, 2], spy, 0, context);
     it ('calls iteratee correct number of times', () => {
       expect(spy.callCount).to.equal(2);
@@ -246,7 +246,7 @@ describe ('_', () => {
     it ('can reduce to an array', () => {
       expect(_.reduce([1,2,3,4,5], function (acc, num) {
         if (num % 2 === 0) {
-          acc.push(num*2);
+          acc.push(num * 2);
         }
         return acc;
       }, [])).to.eql([4,8]);
@@ -270,15 +270,15 @@ describe ('_', () => {
 
   describe ('.every', () => {
     it ('returns false if one or more elements don\'t pass the predicate', () => {
-      function isEven (n) {return n%2 === 0};
-      function isA (c) {return c==='a'};
+      function isEven (n) {return n % 2 === 0;}
+      function isA (c) {return c === 'a';}
       expect(_.every([1, 2, 3], isEven)).to.be.false;
       expect(_.every('aaaba', isA)).to.be.false;
       expect(_.every({'a':2, 'b':3}, isEven)).to.be.false;
     });
     it ('returns true if all elements pass the predicate', () => {
-      function isEven (n) {return n%2 === 0};
-      function isA (c) {return c==='a'};
+      function isEven (n) {return n % 2 === 0;}
+      function isA (c) {return c === 'a';}
       expect(_.every([6, 2, 4], isEven)).to.be.true;
       expect(_.every('aaaa', isA)).to.be.true;
       expect(_.every({'a':2, 'b':8}, isEven)).to.be.true;
@@ -293,15 +293,15 @@ describe ('_', () => {
 
   describe ('.some', () => {
     it ('returns false if all elements don\'t pass the predicate', () => {
-      function isEven (n) {return n%2 === 0};
-      function isA (c) {return c==='a'};
+      function isEven (n) {return n % 2 === 0;}
+      function isA (c) {return c === 'a';}
       expect(_.some([1, 5, 3], isEven)).to.be.false;
       expect(_.some('bcd', isA)).to.be.false;
       expect(_.some({'a':5, 'b':3}, isEven)).to.be.false;
     });
     it ('returns true if any elements pass the predicate', () => {
-      function isEven (n) {return n%2 === 0};
-      function isA (c) {return c==='a'};
+      function isEven (n) {return n % 2 === 0;}
+      function isA (c) {return c === 'a';}
       expect(_.some([6, 1, 3], isEven)).to.be.true;
       expect(_.some('bnkudgwadwu', isA)).to.be.true;
       expect(_.some({'a':2, 'b':5}, isEven)).to.be.true;
@@ -346,7 +346,7 @@ describe ('_', () => {
   });
 
   describe ('.once', () => {
-    const spy = sinon.spy(function (a, b) {});
+    const spy = sinon.spy();
 		it ('can only be called once', () => {
       const func = _.once(spy);
 			func();
@@ -362,8 +362,8 @@ describe ('_', () => {
   });
 
 	describe ('.memoize', () => {
-		var fibonacci = _.memoize(function(n) {
-			return n < 2 ? n: fibonacci(n - 1) + fibonacci(n - 2);
+		var fibonacci = _.memoize(function (n) {
+			return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
 		});
 		it ('speeds up the runtime of a recursive function', () => {
 			expect(fibonacci(40)).to.equal(102334155);
