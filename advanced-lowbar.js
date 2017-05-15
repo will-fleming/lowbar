@@ -247,7 +247,7 @@ _.some = function (list, predicate, context) {
   return false;
 };
 
-_.extend = function (destination, sources) {
+_.extend = function (destination) {
   if (typeof destination !== 'object' || Array.isArray(destination)) return destination;
 
   for (let i = 1; i < arguments.length; i++) {
@@ -260,7 +260,7 @@ _.extend = function (destination, sources) {
   return destination;
 };
 
-_.defaults = function (object, defaults) {
+_.defaults = function (object) {
   if (typeof object !== 'object' || Array.isArray(object)) return object;
 
   for (let i = 1; i < arguments.length; i++) {
@@ -279,7 +279,7 @@ _.once = function (func) {
 	return function () {
 		if (!called) func.apply(null, arguments);
 		called = true;
-	}
+	};
 };
 
 _.memoize = function (func) {
@@ -318,7 +318,7 @@ _.shuffle = function (list) {
 _.invoke = function (list, methodName) {
 	const args = Array.prototype.slice.call(arguments, 2);
 
-	return _.map(list, function(value) {
+	return _.map(list, function (value) {
 		return value[methodName].apply(value, args);
 	});
 };

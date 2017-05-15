@@ -105,7 +105,7 @@ describe ('_', () => {
         sayName: function (name) {
           return name;
         }
-      }
+      };
       const res = [];
       _.each(fruits.names, function (element) {
         res.push(this.sayName(element));
@@ -285,7 +285,7 @@ describe ('_', () => {
     });
     it ('binds the predicate to the context', () => {
       const spy = sinon.spy(function () {});
-      const context = {'a': 'context'}
+      const context = {'a': 'context'};
       _.every([1, 2, 3], spy, context);
       expect(spy.thisValues[0]).to.eql({'a': 'context'});
     });
@@ -308,7 +308,7 @@ describe ('_', () => {
     });
     it ('binds the predicate to the context', () => {
       const spy = sinon.spy(function () {});
-      const context = {'a': 'context'}
+      const context = {'a': 'context'};
       _.some([1, 2, 3], spy, context);
       expect(spy.thisValues[0]).to.eql({'a': 'context'});
     });
@@ -414,7 +414,7 @@ describe ('_', () => {
 
 	describe ('.sortBy', () => {
 		it ('sorts by iteratee', () => {
-			expect(_.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num); })).to.eql([5, 4, 6, 3, 1, 2]);
+			expect(_.sortBy([1, 2, 3, 4, 5, 6], function (num) { return Math.sin(num); })).to.eql([5, 4, 6, 3, 1, 2]);
 		});
 		it ('sorts by property', () => {
 			const obj = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
@@ -426,7 +426,7 @@ describe ('_', () => {
   describe ('.zip', () => {
     it ('merges arrays together', () => {
       const actual = _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
-      const expected = [["moe", 30, true], ["larry", 40, false], ["curly", 50, false]];
+      const expected = [['moe', 30, true], ['larry', 40, false], ['curly', 50, false]];
       expect(actual).to.eql(expected);
     });
   });
