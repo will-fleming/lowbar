@@ -395,13 +395,11 @@ describe ('_', () => {
 	describe ('.shuffle', () => {
 		it ('shuffles an array', () => {
 			const a = [1,2,3,4,5,6,7,8,9];
-			console.log('shuffling ' + a);
-			console.log(_.shuffle(a));
+      expect(_.shuffle(a)).to.be.an('array');
 		});
 		it ('shuffles an object', () => {
 			const o = {'a':1,'b':2,'c':3,'d':4,'e':5,'f':6};
-			console.log('shuffling ' + o);
-			console.log(_.shuffle(o));
+			expect(_.shuffle(o)).to.be.an('array');
 		});
 	});
 
